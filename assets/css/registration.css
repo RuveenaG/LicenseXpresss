@@ -1,480 +1,394 @@
-:root {
-            --primary: #005F73;
-            --primary-light: #0A9396;
-            --primary-bright: #94D3A2;
-            --primary-dark: #001D23;
-            --accent: #EE9B00;
-            --accent-light: #F9C74F;
-            --bg: #001a2e;
-            --bg-light: #002642;
-            --bg-surface: #003153;
-            --text: #FFFFFF;
-            --text-muted: #94B8C4;
-            --surface: rgba(255, 255, 255, 0.05);
-            --surface-hover: rgba(255, 255, 255, 0.1);
-            --gradient-1: linear-gradient(135deg, #005F73 0%, #0A9396 50%, #94D3A2 100%);
-            --gradient-2: linear-gradient(135deg, #EE9B00 0%, #F9C74F 100%);
-            --shadow-glow: 0 0 40px rgba(0, 95, 115, 0.4);
-        }
+/* ============================================
+   REGISTRATION PAGE SPECIFIC STYLES
+   This CSS only contains registration form styles.
+   Header/Navigation styles are in main.css
+   ============================================ */
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+/* Main Container */
+.container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 24px 60px;
+}
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            overflow-x: hidden;
-            line-height: 1.6;
-            min-height: 100vh;
-        }
+.register-wrapper {
+    width: 100%;
+    max-width: 520px;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: cardReveal 0.8s ease-out 0.2s forwards;
+}
 
-        /* Animated Background */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            z-index: -2;
-            background: linear-gradient(45deg, #001a2e, #002642, #003153, #004d73);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease-in-out infinite;
-        }
+@keyframes cardReveal {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
+/* Registration Card */
+.register-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 48px 40px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+}
 
-        .gradient-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.25;
-            animation: orbFloat 12s ease-in-out infinite;
-        }
+.register-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(135deg, #005F73 0%, #0A9396 50%, #94D3A2 100%);
+}
 
-        .gradient-orb:nth-child(1) {
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
-            top: 10%;
-            left: 5%;
-        }
+/* Header Section */
+.register-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
 
-        .gradient-orb:nth-child(2) {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, var(--primary-light) 0%, transparent 70%);
-            top: 50%;
-            right: 10%;
-            animation-delay: 4s;
-        }
+.register-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #EE9B00 0%, #F9C74F 100%);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    margin: 0 auto 24px;
+    animation: iconPulse 2s ease-in-out infinite;
+    box-shadow: 0 4px 20px rgba(238, 155, 0, 0.3);
+}
 
-        @keyframes orbFloat {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(50px, -50px) scale(1.2); }
-            66% { transform: translate(-50px, 50px) scale(0.8); }
-        }
+@keyframes iconPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
 
-        /* Header */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 26, 46, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 1000;
-        }
+.register-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, #005F73 0%, #0A9396 50%, #94D3A2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
 
-        .nav {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 20px 24px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+.register-header p {
+    color: #94B8C4;
+    font-size: 15px;
+}
 
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 600;
-        }
+/* Form Elements */
+.form-group {
+    margin-bottom: 24px;
+}
 
-        .logo-wrap {
-            width: 48px;
-            height: 48px;
-            background: var(--gradient-2);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 18px;
-            color: white;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 20px rgba(238, 155, 0, 0.3);
-        }
+.form-label {
+    display: block;
+    color: #FFFFFF;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
 
-        .logo-wrap:hover {
-            transform: rotate(8deg) scale(1.1);
-            box-shadow: 0 8px 30px rgba(238, 155, 0, 0.4);
-        }
+.form-input {
+    width: 100%;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: #FFFFFF;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
 
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-        }
+.form-input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.08);
+    border-color: #0A9396;
+    box-shadow: 0 0 0 3px rgba(10, 147, 150, 0.1);
+}
 
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-muted);
-            font-weight: 500;
-            font-size: 15px;
-            transition: all 0.3s ease;
-        }
+.form-input::placeholder {
+    color: #94B8C4;
+    opacity: 0.6;
+}
 
-        .nav-links a:hover {
-            color: var(--primary-bright);
-        }
+.form-input.error {
+    border-color: #ff4444;
+}
 
-        /* Main Container */
-        .container {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 120px 24px 60px;
-        }
+/* Password Field */
+.password-wrapper {
+    position: relative;
+}
 
-        .register-wrapper {
-            width: 100%;
-            max-width: 520px;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: cardReveal 0.8s ease-out 0.2s forwards;
-        }
+.password-toggle {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #94B8C4;
+    cursor: pointer;
+    font-size: 18px;
+    transition: color 0.3s ease;
+    padding: 4px;
+}
 
-        @keyframes cardReveal {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+.password-toggle:hover {
+    color: #94D3A2;
+}
 
-        .register-card {
-            background: var(--surface);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            padding: 48px 40px;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
+/* Password Strength Indicator */
+.password-strength {
+    margin-top: 8px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+}
 
-        .register-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--gradient-1);
-        }
+.password-strength-bar {
+    height: 100%;
+    width: 0;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
 
-        .register-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
+.strength-weak { 
+    width: 33%; 
+    background: #ff4444;
+}
 
-        .register-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--gradient-2);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 36px;
-            margin: 0 auto 24px;
-            animation: iconPulse 2s ease-in-out infinite;
-        }
+.strength-medium { 
+    width: 66%; 
+    background: #EE9B00;
+}
 
-        @keyframes iconPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
+.strength-strong { 
+    width: 100%; 
+    background: #44ff44;
+}
 
-        .register-header h1 {
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+.password-hint {
+    font-size: 12px;
+    color: #94B8C4;
+    margin-top: 6px;
+}
 
-        .register-header p {
-            color: var(--text-muted);
-            font-size: 15px;
-        }
+/* Error Messages */
+.error-message {
+    color: #ff4444;
+    font-size: 13px;
+    margin-top: 6px;
+    display: none;
+}
 
-        .form-group {
-            margin-bottom: 24px;
-        }
+/* Checkbox Group */
+.checkbox-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 24px;
+}
 
-        .form-label {
-            display: block;
-            color: var(--text);
-            font-weight: 600;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
+.checkbox-group input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: #0A9396;
+    cursor: pointer;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
 
-        .form-input {
-            width: 100%;
-            padding: 14px 16px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            color: var(--text);
-            font-size: 15px;
-            transition: all 0.3s ease;
-            font-family: inherit;
-        }
+.checkbox-group label {
+    color: #94B8C4;
+    font-size: 14px;
+    line-height: 1.5;
+    cursor: pointer;
+}
 
-        .form-input:focus {
-            outline: none;
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--primary-light);
-            box-shadow: 0 0 0 3px rgba(10, 147, 150, 0.1);
-        }
+.checkbox-group label a {
+    color: #94D3A2;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
 
-        .form-input::placeholder {
-            color: var(--text-muted);
-            opacity: 0.6;
-        }
+.checkbox-group label a:hover {
+    color: #F9C74F;
+    text-decoration: underline;
+}
 
-        .password-wrapper {
-            position: relative;
-        }
+/* Submit Button */
+.btn {
+    background: linear-gradient(135deg, #005F73 0%, #0A9396 50%, #94D3A2 100%);
+    color: white;
+    padding: 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
 
-        .password-toggle {
-            position: absolute;
-            right: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            font-size: 18px;
-            transition: color 0.3s ease;
-        }
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
 
-        .password-toggle:hover {
-            color: var(--primary-bright);
-        }
+.btn:hover::before {
+    left: 100%;
+}
 
-        .password-strength {
-            margin-top: 8px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 2px;
-            overflow: hidden;
-        }
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 40px rgba(0, 95, 115, 0.4);
+}
 
-        .password-strength-bar {
-            height: 100%;
-            width: 0;
-            transition: all 0.3s ease;
-            border-radius: 2px;
-        }
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
 
-        .strength-weak { 
-            width: 33%; 
-            background: #ff4444;
-        }
+.btn:disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
 
-        .strength-medium { 
-            width: 66%; 
-            background: var(--accent);
-        }
+/* Divider */
+.divider {
+    text-align: center;
+    margin: 32px 0;
+    position: relative;
+}
 
-        .strength-strong { 
-            width: 100%; 
-            background: #44ff44;
-        }
+.divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+}
 
-        .password-hint {
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-top: 6px;
-        }
+.divider span {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0 16px;
+    position: relative;
+    color: #94B8C4;
+    font-size: 14px;
+}
 
-        .error-message {
-            color: #ff4444;
-            font-size: 13px;
-            margin-top: 6px;
-            display: none;
-        }
+/* Login Link */
+.login-link {
+    text-align: center;
+    color: #94B8C4;
+    font-size: 14px;
+}
 
-        .form-input.error {
-            border-color: #ff4444;
-        }
+.login-link a {
+    color: #94D3A2;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
 
-        .btn {
-            background: var(--gradient-1);
-            color: white;
-            padding: 16px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 15px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: none;
-            cursor: pointer;
-            width: 100%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
+.login-link a:hover {
+    color: #F9C74F;
+}
 
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
+/* Backend Messages */
+.backend-error,
+.backend-success {
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 14px;
+    animation: slideDown 0.3s ease-out;
+}
 
-        .btn:hover::before {
-            left: 100%;
-        }
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-glow);
-        }
+/* Responsive Design */
+@media (max-width: 768px) {
+    .register-card {
+        padding: 32px 24px;
+    }
 
-        .btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
+    .register-header h1 {
+        font-size: 28px;
+    }
 
-        .divider {
-            text-align: center;
-            margin: 32px 0;
-            position: relative;
-        }
+    .register-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 32px;
+    }
 
-        .divider::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: rgba(255, 255, 255, 0.1);
-        }
+    .container {
+        padding: 100px 16px 40px;
+    }
 
-        .divider span {
-            background: var(--bg-surface);
-            padding: 0 16px;
-            position: relative;
-            color: var(--text-muted);
-            font-size: 14px;
-        }
+    .form-input {
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+}
 
-        .login-link {
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 14px;
-        }
+@media (max-width: 480px) {
+    .register-card {
+        padding: 24px 20px;
+    }
 
-        .login-link a {
-            color: var(--primary-bright);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
+    .register-header h1 {
+        font-size: 24px;
+    }
 
-        .login-link a:hover {
-            color: var(--accent-light);
-        }
+    .form-group {
+        margin-bottom: 20px;
+    }
 
-        .checkbox-group {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin-bottom: 24px;
-        }
-
-        .checkbox-group input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            accent-color: var(--primary-light);
-            cursor: pointer;
-            margin-top: 2px;
-        }
-
-        .checkbox-group label {
-            color: var(--text-muted);
-            font-size: 14px;
-            line-height: 1.5;
-            cursor: pointer;
-        }
-
-        .checkbox-group label a {
-            color: var(--primary-bright);
-            text-decoration: none;
-        }
-
-        .checkbox-group label a:hover {
-            text-decoration: underline;
-        }
-
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            
-            .register-card {
-                padding: 32px 24px;
-            }
-
-            .register-header h1 {
-                font-size: 28px;
-            }
-
-            .container {
-                padding: 100px 16px 40px;
-            }
-        }
-
-        @keyframes toastSlide {
-            0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
-            100% { opacity: 1; transform: translateX(-50%) translateY(0); }
-        }
-
-        @keyframes toastOut {
-            0% { opacity: 1; transform: translateX(-50%) translateY(0); }
-            100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
-        }
+    .btn {
+        padding: 14px;
+    }
+}

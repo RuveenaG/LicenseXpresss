@@ -1,174 +1,282 @@
-// Form validation 
-const form = document.getElementById('registerForm');
-const inputs = {
-    fullName: document.getElementById('fullName'),
-    nic: document.getElementById('nic'),
-    contact: document.getElementById('contact'),
-    email: document.getElementById('email'),
-    password: document.getElementById('password'),
-    confirmPassword: document.getElementById('confirmPassword'),
-    terms: document.getElementById('terms')
-};
-
-// Password toggle 
-document.getElementById('togglePassword').addEventListener('click', function () {
-    const passwordInput = inputs.password;
-    const type = passwordInput.type === 'password' ? 'text' : 'password';
-    passwordInput.type = type;
-    this.textContent = type === 'password' ? '👁️' : '🙈';
-});
-
-document.getElementById('toggleConfirmPassword').addEventListener('click', function () {
-    const confirmPasswordInput = inputs.confirmPassword;
-    const type = confirmPasswordInput.type === 'password' ? 'text' : 'password';
-    confirmPasswordInput.type = type;
-    this.textContent = type === 'password' ? '👁️' : '🙈';
-});
-
-// Password strength bar
-inputs.password.addEventListener('input', function () {
-    const password = this.value;
+// Registration Form JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // Form elements
+    const form = document.getElementById('registerForm');
+    const fullNameInput = document.getElementById('fullName');
+    const nicInput = document.getElementById('nic');
+    const phoneInput = document.getElementById('phone');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const confirmPasswordInput = document.getElementById('confirmPassword');
+    const termsCheckbox = document.getElementById('terms');
+    const submitBtn = document.getElementById('submitBtn');
+    
+    // Error message elements
+    const nameError = document.getElementById('nameError');
+    const nicError = document.getElementById('nicError');
+    const contactError = document.getElementById('contactError');
+    const emailError = document.getElementById('emailError');
+    const passwordError = document.getElementById('passwordError');
+    const confirmPasswordError = document.getElementById('confirmPasswordError');
+    
+    // Password toggle buttons
+    const togglePassword = document.getElementById('togglePassword');
+    const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+    
+    // Password strength bar
     const strengthBar = document.getElementById('strengthBar');
-
-    let strength = 0;
-    if (password.length >= 8) strength++;
-    if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength++;
-    if (password.match(/[0-9]/)) strength++;
-    if (password.match(/[^a-zA-Z0-9]/)) strength++;
-
-    strengthBar.className = 'password-strength-bar';
-    if (strength === 1 || strength === 2) {
-        strengthBar.classList.add('strength-weak');
-    } else if (strength === 3) {
-        strengthBar.classList.add('strength-medium');
-    } else if (strength >= 4) {
-        strengthBar.classList.add('strength-strong');
+    
+    // ===== PASSWORD VISIBILITY TOGGLE =====
+    togglePassword.addEventListener('click', function() {
+        const type = passwordInput.type === 'password' ? 'text' : 'password';
+        passwordInput.type = type;
+        this.textContent = type === 'password' ? '👁️' : '🙈';
+    });
+    
+    toggleConfirmPassword.addEventListener('click', function() {
+        const type = confirmPasswordInput.type === 'password' ? 'text' : 'password';
+        confirmPasswordInput.type = type;
+        this.textContent = type === 'password' ? '👁️' : '🙈';
+    });
+    
+    // ===== PASSWORD STRENGTH CHECKER =====
+    passwordInput.addEventListener('input', function() {
+        const password = this.value;
+        const strength = calculatePasswordStrength(password);
+        
+        strengthBar.className = 'password-strength-bar';
+        
+        if (password.length === 0) {
+            strengthBar.style.width = '0';
+        } else if (strength < 40) {
+            strengthBar.classList.add('strength-weak');
+        } else if (strength < 70) {
+            strengthBar.classList.add('strength-medium');
+        } else {
+            strengthBar.classList.add('strength-strong');
+        }
+    });
+    
+    function calculatePasswordStrength(password) {
+        let strength = 0;
+        
+        if (password.length >= 8) strength += 25;
+        if (password.length >= 12) strength += 15;
+        if (/[a-z]/.test(password)) strength += 15;
+        if (/[A-Z]/.test(password)) strength += 15;
+        if (/[0-9]/.test(password)) strength += 15;
+        if (/[^a-zA-Z0-9]/.test(password)) strength += 15;
+        
+        return strength;
     }
-});
-
-//validation
-inputs.fullName.addEventListener('blur', function () {
-    validateField(this, this.value.trim().length >= 2, 'nameError');
-});
-
-inputs.nic.addEventListener('blur', function () {
-    const nicPattern = /^([0-9]{9}[vVxX]|[0-9]{12})$/;
-    validateField(this, nicPattern.test(this.value), 'nicError');
-});
-
-inputs.phone.addEventListener('blur', function () {
-    const contactPattern = /^0[0-9]{9}$/;
-    validateField(this, contactPattern.test(this.value.replace(/\s/g, '')), 'contactError');
-});
-
-inputs.email.addEventListener('blur', function () {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    validateField(this, emailPattern.test(this.value), 'emailError');
-});
-
-inputs.password.addEventListener('blur', function () {
-    validateField(this, this.value.length >= 8, 'passwordError');
-});
-
-inputs.confirmPassword.addEventListener('blur', function () {
-    validateField(this, this.value === inputs.password.value, 'confirmPasswordError');
-});
-
-function validateField(input, condition, errorId) {
-    const errorElement = document.getElementById(errorId);
-    if (!condition) {
-        input.classList.add('error');
-        errorElement.style.display = 'block';
-        return false;
-    } else {
-        input.classList.remove('error');
-        errorElement.style.display = 'none';
+    
+    // ===== REAL-TIME VALIDATION =====
+    
+    // Full Name Validation
+    fullNameInput.addEventListener('blur', function() {
+        validateFullName();
+    });
+    
+    function validateFullName() {
+        const name = fullNameInput.value.trim();
+        if (name.length < 3) {
+            showError(fullNameInput, nameError, 'Please enter your full name (at least 3 characters)');
+            return false;
+        }
+        hideError(fullNameInput, nameError);
         return true;
     }
-}
-
-
-form.addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    // Validate fields
-    const isNameValid = validateField(inputs.fullName, inputs.fullName.value.trim().length >= 2, 'nameError');
-    const nicPattern = /^([0-9]{9}[vVxX]|[0-9]{12})$/;
-    const isNicValid = validateField(inputs.nic, nicPattern.test(inputs.nic.value), 'nicError');
-    const contactPattern = /^0[0-9]{9}$/;
-    const isContactValid = validateField(inputs.contact, contactPattern.test(inputs.contact.value.replace(/\s/g, '')), 'contactError');
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const isEmailValid = validateField(inputs.email, emailPattern.test(inputs.email.value), 'emailError');
-    const isPasswordValid = validateField(inputs.password, inputs.password.value.length >= 8, 'passwordError');
-    const isConfirmPasswordValid = validateField(inputs.confirmPassword, inputs.confirmPassword.value === inputs.password.value, 'confirmPasswordError');
-
-    if (!inputs.terms.checked) {
-        toast('Please accept the Terms & Conditions');
-        return;
-    }
-
-    if (isNameValid && isNicValid && isContactValid && isEmailValid && isPasswordValid && isConfirmPasswordValid) {
-        const submitBtn = document.getElementById('submitBtn');
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Creating Account...';
-
+    
+    // NIC Validation
+    nicInput.addEventListener('blur', function() {
+        validateNIC();
+    });
+    
+    function validateNIC() {
+        const nic = nicInput.value.trim();
+        const nicPattern = /^([0-9]{9}[vVxX]|[0-9]{12})$/;
         
-        setTimeout(() => {
-            toast('Account created successfully! Redirecting...');
-            setTimeout(() => {
-                window.location.href = 'login.php';
-            }, 1500);
-        }, 1500);
-    } else {
-        toast('Please fill in all fields correctly');
+        if (!nicPattern.test(nic)) {
+            showError(nicInput, nicError, 'Enter valid NIC (9 digits with V/X or 12 digits)');
+            return false;
+        }
+        hideError(nicInput, nicError);
+        return true;
     }
+    
+    // Phone Validation
+    phoneInput.addEventListener('blur', function() {
+        validatePhone();
+    });
+    
+    function validatePhone() {
+        const phone = phoneInput.value.trim();
+        const phonePattern = /^0[0-9]{9}$/;
+        
+        if (!phonePattern.test(phone)) {
+            showError(phoneInput, contactError, 'Enter valid phone number (07XXXXXXXX)');
+            return false;
+        }
+        hideError(phoneInput, contactError);
+        return true;
+    }
+    
+    // Email Validation
+    emailInput.addEventListener('blur', function() {
+        validateEmail();
+    });
+    
+    function validateEmail() {
+        const email = emailInput.value.trim();
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        
+        if (!emailPattern.test(email)) {
+            showError(emailInput, emailError, 'Please enter a valid email address');
+            return false;
+        }
+        hideError(emailInput, emailError);
+        return true;
+    }
+    
+    // Password Validation
+    passwordInput.addEventListener('blur', function() {
+        validatePassword();
+    });
+    
+    function validatePassword() {
+        const password = passwordInput.value;
+        
+        if (password.length < 8) {
+            showError(passwordInput, passwordError, 'Password must be at least 8 characters');
+            return false;
+        }
+        hideError(passwordInput, passwordError);
+        return true;
+    }
+    
+    // Confirm Password Validation
+    confirmPasswordInput.addEventListener('blur', function() {
+        validateConfirmPassword();
+    });
+    
+    confirmPasswordInput.addEventListener('input', function() {
+        if (confirmPasswordInput.value.length > 0) {
+            validateConfirmPassword();
+        }
+    });
+    
+    function validateConfirmPassword() {
+        const password = passwordInput.value;
+        const confirmPassword = confirmPasswordInput.value;
+        
+        if (password !== confirmPassword) {
+            showError(confirmPasswordInput, confirmPasswordError, 'Passwords do not match');
+            return false;
+        }
+        hideError(confirmPasswordInput, confirmPasswordError);
+        return true;
+    }
+    
+    // ===== HELPER FUNCTIONS =====
+    function showError(input, errorElement, message) {
+        input.classList.add('error');
+        errorElement.textContent = message;
+        errorElement.style.display = 'block';
+    }
+    
+    function hideError(input, errorElement) {
+        input.classList.remove('error');
+        errorElement.style.display = 'none';
+    }
+    
+    // ===== FORM SUBMISSION =====
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Validate all fields
+        const isFullNameValid = validateFullName();
+        const isNICValid = validateNIC();
+        const isPhoneValid = validatePhone();
+        const isEmailValid = validateEmail();
+        const isPasswordValid = validatePassword();
+        const isConfirmPasswordValid = validateConfirmPassword();
+        const isTermsAccepted = termsCheckbox.checked;
+        
+        if (!isTermsAccepted) {
+            alert('Please accept the Terms & Conditions and Privacy Policy');
+            return;
+        }
+        
+        // Check if all validations passed
+        if (isFullNameValid && isNICValid && isPhoneValid && isEmailValid && 
+            isPasswordValid && isConfirmPasswordValid) {
+            
+            // Disable submit button to prevent double submission
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Creating Account...';
+            
+            // Submit the form
+            form.submit();
+        } else {
+            // Scroll to first error
+            const firstError = document.querySelector('.form-input.error');
+            if (firstError) {
+                firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                firstError.focus();
+            }
+        }
+    });
+    
+    // ===== AUTO-FORMAT PHONE NUMBER =====
+    phoneInput.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, ''); // Remove non-digits
+        if (value.length > 10) {
+            value = value.slice(0, 10);
+        }
+        e.target.value = value;
+    });
+    
+    // ===== AUTO-FORMAT NIC =====
+    nicInput.addEventListener('input', function(e) {
+        let value = e.target.value.toUpperCase();
+        // Allow only numbers and V/X
+        value = value.replace(/[^0-9VX]/g, '');
+        
+        // Limit length based on format
+        if (value.includes('V') || value.includes('X')) {
+            if (value.length > 10) value = value.slice(0, 10);
+        } else {
+            if (value.length > 12) value = value.slice(0, 12);
+        }
+        
+        e.target.value = value;
+    });
+    
 });
 
-
-function toast(msg) {
-    const t = document.createElement('div');
-    t.textContent = msg;
-    Object.assign(t.style, {
-        position: 'fixed',
-        bottom: '32px',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        background: 'linear-gradient(135deg, #0A9396, #94D3A2)',
-        color: '#fff',
-        padding: '16px 28px',
-        borderRadius: '16px',
-        boxShadow: '0 16px 64px rgba(10, 147, 150, 0.4)',
-        zIndex: '9999',
-        fontWeight: '600',
-        fontSize: '15px',
-        backdropFilter: 'blur(20px)',
-        border: '1px solid rgba(255, 255, 255, 0.1)',
-        opacity: '0',
-        animation: 'toastSlide 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards'
-    });
-
-    document.body.appendChild(t);
-
+// ===== TOAST NOTIFICATION (if needed) =====
+function toast(message) {
+    const toastDiv = document.createElement('div');
+    toastDiv.style.cssText = `
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 95, 115, 0.95);
+        color: white;
+        padding: 16px 24px;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        z-index: 10000;
+        font-size: 14px;
+        animation: toastSlide 0.3s ease-out;
+    `;
+    toastDiv.textContent = message;
+    document.body.appendChild(toastDiv);
+    
     setTimeout(() => {
-        t.style.animation = 'toastOut 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards';
-        setTimeout(() => t.remove(), 400);
-    }, 2600);
+        toastDiv.style.animation = 'toastOut 0.3s ease-out';
+        setTimeout(() => toastDiv.remove(), 300);
+    }, 3000);
 }
-
-
-const orbs = document.querySelectorAll('.gradient-orb');
-document.addEventListener('mousemove', (e) => {
-    const mouseX = e.clientX;
-    const mouseY = e.clientY;
-
-    orbs.forEach((orb, index) => {
-        const rect = orb.getBoundingClientRect();
-        const orbX = rect.left + rect.width / 2;
-        const orbY = rect.top + rect.height / 2;
-
-        const deltaX = (mouseX - orbX) * 0.02;
-        const deltaY = (mouseY - orbY) * 0.02;
-
-        orb.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
-    });
-});

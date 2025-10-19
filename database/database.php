@@ -17,7 +17,8 @@ class Database {
         if (!$this->conn) {
             die("❌ Database Connection Failed: " . mysqli_connect_error());
         } else {
-            
+            // Optional: confirm success
+            // echo "✅ Database Connected Successfully!";
         }
     }
 
