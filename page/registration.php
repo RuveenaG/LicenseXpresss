@@ -35,7 +35,7 @@ require_once '../includes/header.php';
                 <p>Start your journey to driving freedom today</p>
             </div>
 
-            <form id="registerForm" method="POST" action="../backend/registration_backend.php">
+            <form id="registerForm" method="POST" action="backend/registration_backend.php">
 
                 <div class="form-group">
                     <label class="form-label" for="fullName">Full Name</label>
@@ -148,7 +148,7 @@ require_once '../includes/header.php';
             </div>
 
             <div class="login-link">
-                <a href="../pages/login.php">Sign in to your account →</a>
+                <a href="login.php">Sign in to your account →</a>
             </div>
         </div>
     </div>
