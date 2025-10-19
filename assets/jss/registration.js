@@ -1,7 +1,7 @@
-// Registration Form JavaScript
+
 document.addEventListener('DOMContentLoaded', function() {
     
-    // Form elements
+    
     const form = document.getElementById('registerForm');
     const fullNameInput = document.getElementById('fullName');
     const nicInput = document.getElementById('nic');
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const termsCheckbox = document.getElementById('terms');
     const submitBtn = document.getElementById('submitBtn');
     
-    // Error message elements
+    
     const nameError = document.getElementById('nameError');
     const nicError = document.getElementById('nicError');
     const contactError = document.getElementById('contactError');
@@ -20,14 +20,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const passwordError = document.getElementById('passwordError');
     const confirmPasswordError = document.getElementById('confirmPasswordError');
     
-    // Password toggle buttons
+   
     const togglePassword = document.getElementById('togglePassword');
     const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
     
-    // Password strength bar
+    
     const strengthBar = document.getElementById('strengthBar');
     
-    // ===== PASSWORD VISIBILITY TOGGLE =====
+    
     togglePassword.addEventListener('click', function() {
         const type = passwordInput.type === 'password' ? 'text' : 'password';
         passwordInput.type = type;
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
         this.textContent = type === 'password' ? '👁️' : '🙈';
     });
     
-    // ===== PASSWORD STRENGTH CHECKER =====
+    
     passwordInput.addEventListener('input', function() {
         const password = this.value;
         const strength = calculatePasswordStrength(password);
@@ -71,9 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return strength;
     }
     
-    // ===== REAL-TIME VALIDATION =====
     
-    // Full Name Validation
     fullNameInput.addEventListener('blur', function() {
         validateFullName();
     });
@@ -88,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return true;
     }
     
-    // NIC Validation
+    
     nicInput.addEventListener('blur', function() {
         validateNIC();
     });
@@ -105,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return true;
     }
     
-    // Phone Validation
+    
     phoneInput.addEventListener('blur', function() {
         validatePhone();
     });
@@ -122,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return true;
     }
     
-    // Email Validation
+    
     emailInput.addEventListener('blur', function() {
         validateEmail();
     });
@@ -139,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return true;
     }
     
-    // Password Validation
+    
     passwordInput.addEventListener('blur', function() {
         validatePassword();
     });
@@ -155,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return true;
     }
     
-    // Confirm Password Validation
+    
     confirmPasswordInput.addEventListener('blur', function() {
         validateConfirmPassword();
     });
@@ -178,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return true;
     }
     
-    // ===== HELPER FUNCTIONS =====
+    
     function showError(input, errorElement, message) {
         input.classList.add('error');
         errorElement.textContent = message;
@@ -190,11 +188,11 @@ document.addEventListener('DOMContentLoaded', function() {
         errorElement.style.display = 'none';
     }
     
-    // ===== FORM SUBMISSION =====
+    
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        // Validate all fields
+        
         const isFullNameValid = validateFullName();
         const isNICValid = validateNIC();
         const isPhoneValid = validatePhone();
@@ -208,18 +206,18 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        // Check if all validations passed
+        
         if (isFullNameValid && isNICValid && isPhoneValid && isEmailValid && 
             isPasswordValid && isConfirmPasswordValid) {
             
-            // Disable submit button to prevent double submission
+            
             submitBtn.disabled = true;
             submitBtn.textContent = 'Creating Account...';
             
-            // Submit the form
+            
             form.submit();
         } else {
-            // Scroll to first error
+            
             const firstError = document.querySelector('.form-input.error');
             if (firstError) {
                 firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -228,22 +226,22 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // ===== AUTO-FORMAT PHONE NUMBER =====
+    
     phoneInput.addEventListener('input', function(e) {
-        let value = e.target.value.replace(/\D/g, ''); // Remove non-digits
+        let value = e.target.value.replace(/\D/g, ''); 
         if (value.length > 10) {
             value = value.slice(0, 10);
         }
         e.target.value = value;
     });
     
-    // ===== AUTO-FORMAT NIC =====
+    
     nicInput.addEventListener('input', function(e) {
         let value = e.target.value.toUpperCase();
-        // Allow only numbers and V/X
+        
         value = value.replace(/[^0-9VX]/g, '');
         
-        // Limit length based on format
+        
         if (value.includes('V') || value.includes('X')) {
             if (value.length > 10) value = value.slice(0, 10);
         } else {
@@ -255,7 +253,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
 });
 
-// ===== TOAST NOTIFICATION (if needed) =====
+
 function toast(message) {
     const toastDiv = document.createElement('div');
     toastDiv.style.cssText = `

@@ -1,10 +1,4 @@
-/* ============================================
-   REGISTRATION PAGE SPECIFIC STYLES
-   This CSS only contains registration form styles.
-   Header/Navigation styles are in main.css
-   ============================================ */
 
-/* Main Container */
 .container {
     min-height: 100vh;
     display: flex;
@@ -28,7 +22,7 @@
     }
 }
 
-/* Registration Card */
+
 .register-card {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -50,7 +44,7 @@
     background: linear-gradient(135deg, #005F73 0%, #0A9396 50%, #94D3A2 100%);
 }
 
-/* Header Section */
+
 .register-header {
     text-align: center;
     margin-bottom: 40px;
@@ -90,7 +84,7 @@
     font-size: 15px;
 }
 
-/* Form Elements */
+
 .form-group {
     margin-bottom: 24px;
 }
@@ -131,7 +125,7 @@
     border-color: #ff4444;
 }
 
-/* Password Field */
+
 .password-wrapper {
     position: relative;
 }
@@ -154,7 +148,7 @@
     color: #94D3A2;
 }
 
-/* Password Strength Indicator */
+
 .password-strength {
     margin-top: 8px;
     height: 4px;
@@ -191,7 +185,7 @@
     margin-top: 6px;
 }
 
-/* Error Messages */
+
 .error-message {
     color: #ff4444;
     font-size: 13px;
@@ -199,7 +193,7 @@
     display: none;
 }
 
-/* Checkbox Group */
+
 .checkbox-group {
     display: flex;
     align-items: flex-start;
@@ -234,7 +228,7 @@
     text-decoration: underline;
 }
 
-/* Submit Button */
+
 .btn {
     background: linear-gradient(135deg, #005F73 0%, #0A9396 50%, #94D3A2 100%);
     color: white;
@@ -285,7 +279,7 @@
     box-shadow: none;
 }
 
-/* Divider */
+
 .divider {
     text-align: center;
     margin: 32px 0;
@@ -328,7 +322,7 @@
     color: #F9C74F;
 }
 
-/* Backend Messages */
+
 .backend-error,
 .backend-success {
     border-radius: 8px;
@@ -371,7 +365,7 @@
     }
 
     .form-input {
-        font-size: 16px; /* Prevents zoom on iOS */
+        font-size: 16px; 
     }
 }
 
