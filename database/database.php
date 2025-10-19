@@ -11,7 +11,7 @@ class Database {
     }
 
     private function connect() {
-        // ✅ Correct function name
+        
         $this->conn = mysqli_connect($this->host, $this->user, $this->pass, $this->dbname);
 
         if (!$this->conn) {
