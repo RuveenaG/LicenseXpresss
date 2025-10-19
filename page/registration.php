@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register - LicenseXpress</title>
+<<<<<<< Updated upstream
     <link rel="stylesheet" href="../assets/css/registration.css">
 
+=======
+    <link rel="stylesheet" href="registration.css">
+>>>>>>> Stashed changes
 
     
 </head>
@@ -153,6 +157,10 @@
         </div>
     </div>
 
+<<<<<<< Updated upstream
     <script src="../assests/jss/registration.js"></script>
+=======
+    <script src="registration.js"></script>
+>>>>>>> Stashed changes
 </body>
 </html>
