@@ -2,11 +2,11 @@
 session_start();
 $page_title = 'Register';
 $current_page = 'registration';
-$base_url = '../'; // Adjust based on your folder structure
+$base_url = '../'; 
 require_once '../includes/header.php';
 ?>
 
-<!-- Registration specific styles only -->
+
 <link rel="stylesheet" href="<?php echo $base_url; ?>assets/css/registration.css">
 
 <div class="container">
