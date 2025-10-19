@@ -16,15 +16,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nic = $conn->real_escape_string(trim($_POST['nic']));
     $contact = $conn->real_escape_string(trim($_POST['phone']));
     $email = $conn->real_escape_string(trim($_POST['email']));
-    $password = $_POST['password'];
-    $confirmPassword = $_POST['confirmPassword'];
+    $password = trim($_POST['password']); // ✅ Added trim()
+    $confirmPassword = trim($_POST['confirmPassword']); // ✅ Added trim()
 
+    // Validate password match
     if ($password !== $confirmPassword) {
         $_SESSION['error'] = "Passwords do not match.";
         header("Location: ../registration.php");
         exit();
     }
 
+    // Check if user already exists
     $checkQuery = "SELECT * FROM users WHERE email = '$email' OR nic = '$nic'";
     $checkResult = $conn->query($checkQuery);
 
@@ -34,12 +36,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit();
     }
 
+    // Hash password
     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
+    // Insert new user
     $insertQuery = "INSERT INTO users (full_name, nic, phone, email, password_hash, created_at, updated_at)
                     VALUES ('$fullName', '$nic', '$contact', '$email', '$passwordHash', NOW(), NOW())";
 
     if ($conn->query($insertQuery) === TRUE) {
+        $_SESSION['success'] = "Registration successful! Please login.";
         header("Location: ../login.php");
         exit();
     } else {
