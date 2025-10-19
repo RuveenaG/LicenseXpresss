@@ -11,14 +11,13 @@ class Database {
     }
 
     private function connect() {
-        // ✅ Correct function name
+        
         $this->conn = mysqli_connect($this->host, $this->user, $this->pass, $this->dbname);
 
         if (!$this->conn) {
             die("❌ Database Connection Failed: " . mysqli_connect_error());
         } else {
-            // Optional: confirm success
-            // echo "✅ Database Connected Successfully!";
+            echo "✅ Database Connected Successfully!";
         }
     }
 

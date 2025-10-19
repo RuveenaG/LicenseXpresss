@@ -1,49 +1,57 @@
 <?php
-require_once "database.php";
-
 session_start();
-
+require_once("../../database/database.php");
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
     $db = new Database();
     $conn = $db->getConnection();
 
     if (!$conn) {
-        die("❌ Database connection failed: " . mysqli_connect_error());
+        $_SESSION['error'] = "Database connection failed.";
+        header("Location: ../registration.php");
+        exit();
     }
 
     $fullName = $conn->real_escape_string(trim($_POST['fullName']));
     $nic = $conn->real_escape_string(trim($_POST['nic']));
     $contact = $conn->real_escape_string(trim($_POST['phone']));
     $email = $conn->real_escape_string(trim($_POST['email']));
-    $password = $_POST['password']; 
-    $confirmPassword = $_POST['confirmPassword']; 
+    $password = $_POST['password'];
+    $confirmPassword = $_POST['confirmPassword'];
 
-    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+    if ($password !== $confirmPassword) {
+        $_SESSION['error'] = "Passwords do not match.";
+        header("Location: ../registration.php");
+        exit();
+    }
 
-    // Check email and nic
     $checkQuery = "SELECT * FROM users WHERE email = '$email' OR nic = '$nic'";
     $checkResult = $conn->query($checkQuery);
 
     if ($checkResult->num_rows > 0) {
-        die("❌ Email or NIC already registered.");
+        $_SESSION['error'] = "Email or NIC is already registered.";
+        header("Location: ../registration.php");
+        exit();
     }
 
-    // Insert to database
+    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
     $insertQuery = "INSERT INTO users (full_name, nic, phone, email, password_hash, created_at, updated_at)
                     VALUES ('$fullName', '$nic', '$contact', '$email', '$passwordHash', NOW(), NOW())";
 
     if ($conn->query($insertQuery) === TRUE) {
-        header("Location: login.php");
+        header("Location: ../login.php");
         exit();
     } else {
-    echo "❌ Registration failed: " . $conn->error;
-}
+        $_SESSION['error'] = "Registration failed: " . $conn->error;
+        header("Location: ../registration.php");
+        exit();
+    }
 
     $conn->close();
-
 } else {
-    echo "❌ Invalid request method.";
+    $_SESSION['error'] = "Invalid request method.";
+    header("Location: ../registration.php");
+    exit();
 }
 ?>
