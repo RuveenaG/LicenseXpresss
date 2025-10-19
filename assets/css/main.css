@@ -1,0 +1,525 @@
+:root {
+    
+    --primary: #005F73;
+    --primary-light: #0A9396;
+    --primary-bright: #94D3A2;
+    --primary-dark: #001D23;
+    --accent: #EE9B00;
+    --accent-light: #F9C74F;
+    --bg: #001a2e;
+    --bg-light: #002642;
+    --bg-surface: #003153;
+    --text: #FFFFFF;
+    --text-muted: #94B8C4;
+    --surface: rgba(255, 255, 255, 0.05);
+    --surface-hover: rgba(255, 255, 255, 0.1);
+    --gradient-1: linear-gradient(135deg, #005F73 0%, #0A9396 50%, #94D3A2 100%);
+    --gradient-2: linear-gradient(135deg, #EE9B00 0%, #F9C74F 100%);
+    --shadow-glow: 0 0 40px rgba(0, 95, 115, 0.4);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+
+.bg-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -2;
+    background: linear-gradient(45deg, #001a2e, #002642, #003153, #004d73);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease-in-out infinite;
+}
+
+.floating-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    opacity: 0.6;
+}
+
+.flow-line {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary-light), transparent);
+    opacity: 0.3;
+    animation: flowLine 8s linear infinite;
+}
+
+.ripple {
+    position: absolute;
+    border: 1px solid var(--primary-light);
+    border-radius: 50%;
+    opacity: 0;
+    animation: rippleEffect 6s ease-out infinite;
+}
+
+.wave-overlay {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background: radial-gradient(circle at 30% 50%, rgba(0, 95, 115, 0.25) 0%, transparent 50%),
+                radial-gradient(circle at 70% 50%, rgba(10, 147, 150, 0.2) 0%, transparent 50%);
+    animation: waveFloat 20s ease-in-out infinite;
+}
+
+.gradient-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.25;
+    animation: orbFloat 12s ease-in-out infinite;
+    transition: all 0.5s ease;
+}
+
+.gradient-orb:nth-child(1) {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+    top: 10%;
+    left: 5%;
+    animation-delay: 0s;
+}
+
+.gradient-orb:nth-child(2) {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, var(--primary-light) 0%, transparent 70%);
+    top: 50%;
+    right: 10%;
+    animation-delay: 4s;
+}
+
+.gradient-orb:nth-child(3) {
+    width: 450px;
+    height: 450px;
+    background: radial-gradient(circle, var(--primary-bright) 0%, transparent 70%);
+    bottom: 5%;
+    left: 35%;
+    animation-delay: 8s;
+}
+
+.grid-pattern {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(10, 147, 150, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(10, 147, 150, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: gridMove 30s linear infinite;
+}
+
+.geometric-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+    opacity: 0.1;
+}
+
+.geometric-shape {
+    position: absolute;
+    border: 1px solid var(--primary-light);
+    animation: geometricFloat 15s linear infinite;
+}
+
+/* HEADER & NAVIGATION PART*/
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 26, 46, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 1000;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 600;
+}
+
+.logo-wrap {
+    width: 48px;
+    height: 48px;
+    background: var(--gradient-2);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 18px;
+    color: white;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 20px rgba(238, 155, 0, 0.3);
+}
+
+.logo-wrap:hover {
+    transform: rotate(8deg) scale(1.1);
+    box-shadow: 0 8px 30px rgba(238, 155, 0, 0.4);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 8px 0;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--primary-bright);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gradient-1);
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+/*BUTTONS */
+.btn {
+    background: var(--gradient-1);
+    color: white;
+    padding: 14px 28px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-glow);
+}
+
+.btn.ghost {
+    background: transparent;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+}
+
+.btn.ghost:hover {
+    background: var(--gradient-1);
+    color: white;
+    border-color: transparent;
+}
+
+.btn.large {
+    padding: 18px 36px;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.mobile-menu {
+    display: none;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+    background: rgba(0, 18, 25, 0.95);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+}
+
+.mobile-menu a {
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/*  MAIN CONTENT & SHARED SECTIONS  */
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.section-title {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    background: var(--gradient-1);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.section-subtitle {
+    font-size: 20px;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/*  FOOTER  */
+
+.footer {
+    background: #001a2e;
+    padding: 60px 0 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 40px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 24px;
+}
+
+.footer-brand h3 {
+    color: var(--primary-bright);
+    margin-bottom: 16px;
+    font-size: 24px;
+}
+
+.footer-brand p {
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+.footer-links h4 {
+    color: var(--text);
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.footer-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 12px;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--primary-bright);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-muted);
+}
+
+/* GLOBAL KEYFRAME ANIMATIONS */
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes flowLine {
+    0% {
+        transform: translateX(-100%) translateY(0);
+        opacity: 0;
+    }
+    10% { opacity: 0.3; }
+    90% { opacity: 0.3; }
+    100% {
+        transform: translateX(100vw) translateY(50px);
+        opacity: 0;
+    }
+}
+
+@keyframes rippleEffect {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 0.6;
+    }
+    50% { opacity: 0.3; }
+    100% {
+        width: 300px;
+        height: 300px;
+        opacity: 0;
+    }
+}
+
+@keyframes waveFloat {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(-5%, 5%) rotate(120deg); }
+    66% { transform: translate(5%, -5%) rotate(240deg); }
+}
+
+@keyframes orbFloat {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(50px, -50px) scale(1.2); }
+    66% { transform: translate(-50px, 50px) scale(0.8); }
+}
+
+@keyframes gridMove {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(50px, 50px); }
+}
+
+@keyframes geometricFloat {
+    0% { transform: translateX(-100px) rotate(0deg); }
+    100% { transform: translateX(calc(100vw + 100px)) rotate(360deg); }
+}
+
+@keyframes toastSlide {
+    0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+    100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+@keyframes toastOut {
+    0% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+}
+
+/*RESPONSIVE DESIGN - GLOBAL */
+
+@media (max-width: 1024px) {
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-links { 
+        display: none; 
+    }
+    
+    .mobile-toggle { 
+        display: block; 
+    }
+    
+    .section-title { 
+        font-size: 32px; 
+    }
+    
+    .section-subtitle { 
+        font-size: 16px; 
+    }
+    
+    .container { 
+        padding: 0 16px; 
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 0 16px;
+    }
+    
+    .btn.large {
+        padding: 14px 24px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-title { 
+        font-size: 28px; 
+    }
+    
+    .nav { 
+        padding: 12px 16px; 
+    }
+    
+    .logo-wrap {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+}
