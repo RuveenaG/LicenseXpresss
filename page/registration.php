@@ -1,13 +1,13 @@
 <?php
 session_start();
 $page_title = 'Register';
-$current_page = 'register';
+$current_page = 'registration';
 $base_url = '../'; // Adjust based on your folder structure
 require_once '../includes/header.php';
 ?>
 
 <!-- Registration specific styles only -->
-<link rel="stylesheet" href="../assets/css/registration.css">
+<link rel="stylesheet" href="<?php echo $base_url; ?>assets/css/registration.css">
 
 <div class="container">
     <div class="register-wrapper">
@@ -152,10 +152,12 @@ require_once '../includes/header.php';
             </div>
         </div>
     </div>
+
+    
 </div>
-
-<script src="../assets/js/registration.js"></script>
-
 <?php
-include_once '../includes/footer.php';
+require_once '../includes/footer.php';
 ?>
+
+<script src="../assets/jss/registration.js"></script>
+
