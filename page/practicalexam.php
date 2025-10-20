@@ -1,6 +1,7 @@
 <?php
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 // Set page-specific variables
 $page_title = "Practical Exam Schedule";
 $base_url = "../"; // Adjust based on your folder structure
@@ -12,6 +13,8 @@ include '../includes/header.php';
 <link rel="stylesheet" href="../assets/css/practicalexam.css">
   <!-- Main Content -->
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 
@@ -26,6 +29,9 @@ include '../includes/header.php';
 <link rel="stylesheet" href="../assets/css/practicalexam.css">
   
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -65,7 +71,11 @@ include '../includes/header.php';
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   <!-- Calendar Modal -->
+=======
+  
+>>>>>>> Stashed changes
 =======
   
 >>>>>>> Stashed changes
@@ -90,6 +100,7 @@ include '../includes/header.php';
 <?php
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 // Include footer
 include '../includes/footer.php';
 ?>
@@ -98,12 +109,17 @@ include '../includes/footer.php';
 =======
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 
 include '../includes/footer.php';
 ?>
 
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
