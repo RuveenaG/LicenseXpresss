@@ -1,15 +1,16 @@
 <?php
 
-// Set page-specific variables
-$page_title = "Practical Exam Schedule";
-$base_url = "../"; // Adjust based on your folder structure
-$page_css = "practicalexam"; // This will load practicalexam.css
 
-// Include header
+$page_title = "Practical Exam Schedule";
+$base_url = "../"; 
+$page_css = "practicalexam"; 
+
+
+
 include '../includes/header.php';
 ?>
 <link rel="stylesheet" href="../assets/css/practicalexam.css">
-  <!-- Main Content -->
+  
 
 <link rel="stylesheet" href="../assets/css/practicalexam.css">
   
@@ -49,7 +50,7 @@ include '../includes/header.php';
   </div>
 
 
-  <!-- Calendar Modal -->
+  
 
   <div class="calendar-modal" id="calendarModal">
     <div class="calendar-container">
@@ -68,28 +69,13 @@ include '../includes/header.php';
 
 <?php
 
-// Include footer
-include '../includes/footer.php';
-?>
 
-<!-- Page-specific JavaScript -->
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 
 include '../includes/footer.php';
 ?>
 
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
 <script src="<?php echo isset($base_url) ? $base_url : ''; ?>assets/jss/practicalexam.js"></script>
 <script>
   console.log('JavaScript file path:', '<?php echo isset($base_url) ? $base_url : ''; ?>assets/js/practicalexam.js');
