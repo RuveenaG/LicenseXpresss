@@ -1,19 +1,16 @@
-/**
- * Practical Exam Page JavaScript
- * Path: assets/js/practicalexam.js
- */
 
-// Initialize dates
+
+
+
+
 const writtenTestDate = new Date('2025-08-15');
 const practicalExamDate = new Date(writtenTestDate);
 practicalExamDate.setMonth(practicalExamDate.getMonth() + 3);
 let selectedDate = null;
 
-/**
- * Initialize the page when DOM is loaded
- */
+
 function initPracticalExam() {
-  // Set initial dates
+  
   const writtenDateEl = document.getElementById('writtenTestDate');
   const practicalDateEl = document.getElementById('practicalExamDate');
   
@@ -25,15 +22,13 @@ function initPracticalExam() {
     practicalDateEl.textContent = practicalExamDate.toDateString();
   }
   
-  // Create floating particles
+  
   createParticles();
   
   console.log('Practical Exam page initialized');
 }
 
-/**
- * Create floating particles for background animation
- */
+
 function createParticles() {
   const particlesContainer = document.getElementById('particleContainer');
   if (!particlesContainer) return;
@@ -51,9 +46,7 @@ function createParticles() {
   }
 }
 
-/**
- * Open the calendar modal
- */
+
 function openCalendar() {
   const modal = document.getElementById('calendarModal');
   if (!modal) {
@@ -67,9 +60,7 @@ function openCalendar() {
   console.log('Calendar opened');
 }
 
-/**
- * Close the calendar modal
- */
+
 function closeCalendar() {
   const modal = document.getElementById('calendarModal');
   if (!modal) return;
@@ -78,10 +69,7 @@ function closeCalendar() {
   console.log('Calendar closed');
 }
 
-/**
- * Render full year calendar
- * @param {number} year - Year to render
- */
+
 function renderFullYearCalendar(year) {
   const grid = document.getElementById('calendarGrid');
   if (!grid) {
@@ -111,7 +99,7 @@ function renderFullYearCalendar(year) {
     const firstDay = new Date(year, m, 1).getDay();
     const daysInMonth = new Date(year, m + 1, 0).getDate();
 
-    // Add empty cells for days before month starts
+    
     for (let i = 0; i < firstDay; i++) {
       const empty = document.createElement('div');
       empty.textContent = '';
@@ -121,7 +109,7 @@ function renderFullYearCalendar(year) {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    // Add day cells
+    
     for (let d = 1; d <= daysInMonth; d++) {
       const day = document.createElement('div');
       day.classList.add('day');
@@ -130,11 +118,11 @@ function renderFullYearCalendar(year) {
       const currentDate = new Date(year, m, d);
       currentDate.setHours(0, 0, 0, 0);
 
-      // Disable past dates
+      
       if (currentDate < today) {
         day.classList.add('unavailable');
       } else {
-        // Add click handler for future dates
+        
         day.onclick = () => {
           document.querySelectorAll('.day').forEach(el => el.classList.remove('selected'));
           day.classList.add('selected');
@@ -153,9 +141,7 @@ function renderFullYearCalendar(year) {
   console.log('Calendar rendered for year:', year);
 }
 
-/**
- * Confirm reschedule and update the date
- */
+
 function confirmReschedule() {
   if (!selectedDate) {
     alert('⚠️ Please select a new date for your practical exam.');
@@ -167,7 +153,7 @@ function confirmReschedule() {
     practicalDateEl.textContent = selectedDate.toDateString();
   }
   
-  // Show success message
+  
   if (typeof toast === 'function') {
     toast(`✅ Your practical exam has been rescheduled to ${selectedDate.toDateString()}`);
   } else {
@@ -178,12 +164,12 @@ function confirmReschedule() {
   console.log('Exam rescheduled to:', selectedDate.toDateString());
 }
 
-// Initialize when DOM is ready
+
 document.addEventListener('DOMContentLoaded', () => {
   initPracticalExam();
 });
 
-// Make functions globally available
+
 window.openCalendar = openCalendar;
 window.closeCalendar = closeCalendar;
 window.confirmReschedule = confirmReschedule;

@@ -1,23 +1,11 @@
-/**
- * Guidelines Page Specific Styles
- * Path: assets/css/guidelines.css
- * 
- * This file contains styles unique to the Guidelines page
- * Works alongside main.css (base styles)
- */
 
-/* ===================================
-   GUIDELINES CONTAINER
-   =================================== */
 .guidelines-container {
     max-width: 1200px;
     margin: 120px auto 80px;
     padding: 0 24px;
 }
 
-/* ===================================
-   HERO SECTION
-   =================================== */
+
 .guidelines-hero {
     text-align: center;
     margin-bottom: 100px;
@@ -45,9 +33,7 @@
     animation: fadeInUp 0.8s ease-out 0.2s backwards;
 }
 
-/* ===================================
-   LANGUAGE BUTTONS
-   =================================== */
+
 .language-buttons {
     display: flex;
     gap: 16px;
@@ -81,9 +67,7 @@
     border-color: transparent;
 }
 
-/* ===================================
-   VIDEO CONTAINER
-   =================================== */
+
 .video-container {
     display: flex;
     justify-content: center;
@@ -115,9 +99,7 @@
                 0 0 100px rgba(10, 147, 150, 0.3);
 }
 
-/* ===================================
-   STEPS SECTION
-   =================================== */
+
 .guidelines-steps {
     margin-top: 100px;
 }
@@ -202,9 +184,7 @@
     font-size: 15px;
 }
 
-/* ===================================
-   ANIMATIONS
-   =================================== */
+
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -227,9 +207,7 @@
     }
 }
 
-/* ===================================
-   RESPONSIVE DESIGN
-   =================================== */
+
 @media (max-width: 1024px) {
     .guidelines-title {
         font-size: 44px;

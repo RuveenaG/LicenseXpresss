@@ -1,14 +1,15 @@
 <?php
-// Set page-specific variables
-$page_title = "Guidelines";
-$base_url = "../"; // Adjust based on your folder structure
-$page_css = "guidelines"; // This will load guidelines.css
 
-// Include header
+$page_title = "Guidelines";
+$base_url = "../"; 
+$page_css = "guidelines"; 
+
+
+
 include '../includes/header.php';
 ?>
 <link rel="stylesheet" href="../assets/css/guidelines.css">
-  <!-- Main content -->
+  
   <main class="guidelines-container" role="main">
     <section class="guidelines-hero">
       <h1 class="guidelines-title">Driving License Guidelines</h1>
@@ -62,9 +63,9 @@ include '../includes/header.php';
   </main>
 
 <?php
-// Include footer
+
 include '../includes/footer.php';
 ?>
 
-<!-- Page-specific JavaScript -->
+
 <script src="<?php echo $base_url; ?>assets/jss/guidelines.js"></script>

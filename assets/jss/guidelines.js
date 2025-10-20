@@ -1,19 +1,9 @@
-/**
- * Guidelines Page JavaScript
- * Path: assets/js/guidelines.js
- * 
- * Contains functionality specific to the Guidelines page
- * Works alongside main.js (global functionality)
- */
 
-/* ===================================
-   LANGUAGE SWITCHING (VIDEOS)
-   =================================== */
 
-/**
- * Switch between language videos
- * @param {string} language - Language to switch to ('sinhala', 'english', 'tamil')
- */
+
+ 
+
+ 
 function changeLanguage(language) {
     const videos = {
         sinhala: document.getElementById('sinhalaVideo'),
@@ -21,7 +11,7 @@ function changeLanguage(language) {
         tamil: document.getElementById('tamilVideo')
     };
 
-    // Hide all videos and pause them
+    
     Object.values(videos).forEach(video => {
         if (!video) return;
         video.pause();
@@ -29,11 +19,11 @@ function changeLanguage(language) {
         video.currentTime = 0;
     });
 
-    // Update button states
+    
     const buttons = document.querySelectorAll('.language-buttons .btn');
     buttons.forEach(btn => btn.classList.remove('active'));
 
-    // Find and activate the clicked button
+    
     buttons.forEach(btn => {
         const btnText = btn.textContent.toLowerCase();
         if (btnText === language) {
@@ -41,12 +31,12 @@ function changeLanguage(language) {
         }
     });
 
-    // Show and play the selected video
+    
     const selectedVideo = videos[language];
     if (selectedVideo) {
         selectedVideo.classList.add('active');
         
-        // Try to play (may be blocked by browser autoplay policy)
+        
         const playPromise = selectedVideo.play();
         if (playPromise !== undefined) {
             playPromise.catch(error => {
@@ -59,7 +49,7 @@ function changeLanguage(language) {
         }
     }
 
-    // Show toast notification
+
     if (typeof toast === 'function') {
         const languageNames = {
             sinhala: 'Sinhala',
@@ -70,21 +60,18 @@ function changeLanguage(language) {
     }
 }
 
-/* ===================================
-   VIDEO INTERACTION ENHANCEMENTS
-   =================================== */
 
-/**
- * Add keyboard controls to videos
- */
+
+
+
 function setupVideoKeyboardControls() {
     const videos = document.querySelectorAll('.video');
     
     videos.forEach(video => {
         video.addEventListener('keydown', (e) => {
             switch(e.key) {
-                case ' ': // Space bar
-                case 'k': // K key (YouTube-style)
+                case ' ': 
+                case 'k': 
                     e.preventDefault();
                     if (video.paused) {
                         video.play();
@@ -115,9 +102,7 @@ function setupVideoKeyboardControls() {
     });
 }
 
-/**
- * Track video completion
- */
+
 function setupVideoTracking() {
     const videos = document.querySelectorAll('.video');
     
@@ -127,7 +112,7 @@ function setupVideoTracking() {
         video.addEventListener('timeupdate', () => {
             const percentWatched = (video.currentTime / video.duration) * 100;
             
-            // Trigger when user watches 75% of the video
+            
             if (percentWatched >= 75 && !hasWatched75Percent) {
                 hasWatched75Percent = true;
                 if (typeof toast === 'function') {
@@ -144,29 +129,26 @@ function setupVideoTracking() {
     });
 }
 
-/* ===================================
-   STEP CARDS INTERACTION
-   =================================== */
 
-/**
- * Add click interaction to step cards
- */
+
+
+
 function setupStepCards() {
     const stepCards = document.querySelectorAll('.step-card');
     
     stepCards.forEach((card, index) => {
-        // Add staggered animation
+    
         card.style.animationDelay = `${index * 0.1}s`;
         
-        // Add click feedback
+        
         card.addEventListener('click', () => {
-            // Visual feedback
+            
             card.style.transform = 'scale(0.98)';
             setTimeout(() => {
                 card.style.transform = '';
             }, 150);
             
-            // Optional: Show detailed info
+            
             const stepNumber = card.querySelector('.step-number').textContent;
             if (typeof toast === 'function') {
                 toast(`Step ${stepNumber} - Check the video guide for details`);
@@ -175,13 +157,10 @@ function setupStepCards() {
     });
 }
 
-/* ===================================
-   SCROLL ANIMATIONS
-   =================================== */
 
-/**
- * Animate elements on scroll into view
- */
+
+
+
 function setupScrollAnimations() {
     const observerOptions = {
         threshold: 0.1,
@@ -197,7 +176,7 @@ function setupScrollAnimations() {
         });
     }, observerOptions);
     
-    // Observe step cards
+    
     const stepCards = document.querySelectorAll('.step-card');
     stepCards.forEach(card => {
         card.style.opacity = '0';
@@ -207,13 +186,10 @@ function setupScrollAnimations() {
     });
 }
 
-/* ===================================
-   MOBILE MENU CLOSE ON LINK CLICK
-   =================================== */
 
-/**
- * Close mobile menu when a link is clicked
- */
+
+
+
 function setupMobileMenuLinks() {
     const mobileMenu = document.getElementById('mobileMenu');
     const mobileToggle = document.getElementById('mobileToggle');
@@ -230,38 +206,36 @@ function setupMobileMenuLinks() {
     });
 }
 
-/* ===================================
-   INITIALIZATION
-   =================================== */
+
 
 document.addEventListener('DOMContentLoaded', () => {
     
-    // Setup video enhancements
+    
     setupVideoKeyboardControls();
     setupVideoTracking();
     
-    // Setup step cards interaction
+    
     setupStepCards();
     
-    // Setup scroll animations
+    
     setupScrollAnimations();
     
-    // Setup mobile menu links
+    
     setupMobileMenuLinks();
     
-    // Auto-play first video (if browser allows)
+    
     const firstVideo = document.getElementById('sinhalaVideo');
     if (firstVideo && firstVideo.classList.contains('active')) {
         const playPromise = firstVideo.play();
         if (playPromise !== undefined) {
             playPromise.catch(() => {
-                // Autoplay blocked - user will need to click play
+                
                 console.log('Autoplay blocked by browser');
             });
         }
     }
     
-    // Add keyboard shortcut info
+    
     console.log('Video Keyboard Controls:');
     console.log('- Space/K: Play/Pause');
     console.log('- Arrow Left: Rewind 5s');
@@ -270,11 +244,10 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('- F: Fullscreen');
 });
 
-/* ===================================
-   ACCESSIBILITY ENHANCEMENTS
-   =================================== */
 
-// Add focus visible styles for keyboard navigation
+
+
+
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Tab') {
         document.body.classList.add('keyboard-nav');
